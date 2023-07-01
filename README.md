@@ -4,18 +4,13 @@
 
 ## A Python wrapper for the Hunter.io v2 API
 
-### Installation
+### Changes done to this repo
+In order to integrate into [MassEmailSender](https://github.com/sinmentis/MassEmailSender), I "clean up" the code a bit to keep the basically functionality of searching and return.
+* Removed the printout log.
+* Removed save to local.
+* Removed all the beautiful doc and makefile.
 
-Requirements:
-
-* Python 3 (no Python 2 version)
-
-
-To install:
-
-```bash
-pip install pyhunter
-```
+**Please visit original repo in [here](https://github.com/VonStruddle/PyHunter)**
 
 ### Usage
 
