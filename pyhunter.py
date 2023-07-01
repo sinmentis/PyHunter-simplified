@@ -27,7 +27,7 @@ class PyHunter:
         return data
 
     def domain_search(self, domain=None, company=None, limit=None, offset=None,
-                      seniority=None, department=None, emails_type=None, raw=False):
+                      seniority=None, department=None, emails_type=None, raw=False, email_only=False):
         """
         Return all the email addresses found for a given domain.
 
@@ -82,7 +82,11 @@ class PyHunter:
 
         endpoint = self.base_endpoint.format('domain-search')
 
-        return self._query_hunter(endpoint, params, raw=raw)
+        if email_only:
+            query_result = self._query_hunter(endpoint, params, raw=raw)
+            return [result["value"] for result in query_result["emails"]]
+        else:
+            return self._query_hunter(endpoint, params, raw=raw)
 
     def email_finder(self, domain=None, company=None, first_name=None,
                      last_name=None, full_name=None, raw=False):
