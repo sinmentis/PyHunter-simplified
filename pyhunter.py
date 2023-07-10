@@ -4,10 +4,14 @@ from .exceptions import MissingCompanyError, MissingNameError, HunterApiError
 
 
 class PyHunter:
-    def __init__(self, api_key):
+    def __init__(self, api_key, debug_only=False):
+        """
+        param debug_only: Returns fake result for whatever reason :)
+        """
         self.api_key = api_key
         self.base_params = {'api_key': api_key}
         self.base_endpoint = 'https://api.hunter.io/v2/{}'
+        self.debug_only = debug_only
 
     def _query_hunter(self, endpoint, params, request_type='get',
                       payload=None, headers=None, raw=False):
@@ -53,9 +57,14 @@ class PyHunter:
 
         :param raw: Gives back the entire response instead of just the 'data'.
 
+        :param email_only: Only returns the email list ["example@example.com", ...]
+
         :return: Full payload of the query as a dict, with email addresses
         found.
         """
+        if self.debug_only:
+            return ["test@gmail.com", "test2@gmail.com"]
+
         if domain:
             params = {'domain': domain, 'api_key': self.api_key}
         elif company:
